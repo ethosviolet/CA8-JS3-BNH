@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="author" content="Jacob Hobzek">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bear, Ninja, Hunter</title>
+    
+</head>
+<body>
+<p id="choice"></p> <!-- displays user name and fighter choice-->
+<p id="computer"></p> <!-- computers randomly selected choice-->
+<p id="result"></p> <!-- The reference for the getelementbyID.innerhtml (result) for the result of the game-->
+<p id="falsereplayentry"></p>
+<script>
+  let user = prompt('Welcome to Bear Hunter Ninja! Please enter your name to get started:'); // user variable is entered with prompt message
+  let greeting = `Hi ${user}`;// greeting is defined as the name you entered in a template literal
+  console.log(greeting + ' Let\'s play '); //console log displays text from greeting + additional greeting text
+  if (user) {
+    alert(greeting + ' Let\'s play!'); // conditional for the entered username pushes an alert with greeting text and welcome message
+  }
+  else
+  { document.getElementById("result").innerHTML = "Please Press F5 to Play Again"; // cancel displays this message
+}
+  const options = ["bear", "ninja", "hunter"]; // a constant array of the options for user or computer choice
+  let playAgain = true; //play again variable assigned true by default
+
+  while (playAgain) { //start of play again loop
+  const randomIndex = Math.floor(Math.random() * options.length); // math.floor for integer value(Math.random(for random value) * options.length (0-2)
+  const computerChoice = options[randomIndex]; // the computer choice is randomly assigned by taking the options array and selecting a random index value using the above formula.
+  let fighter = prompt('Who are you: Bear, Ninja, or Hunter?'); // fighter variable is entered with prompt message
+if (!fighter) { // if not fighter
+    document.getElementById("result").innerHTML = ("Please Press F5 to Play Again"); //if you chose cancel instead of entering a value, this displays in result
+  break; //exits loop
+  } else {
+    fighter = fighter.toLowerCase(); //normalize case to lower case. All entered values will match to computers lower case chosen value
+    document.getElementById("choice").innerHTML = `${user}, you chose ${fighter}!`; // html document operator.method of data transmission("identifier").withinidentifiertags operates as user (tl) picked fighter (tl)
+    document.getElementById("computer").innerHTML = `The computer chose ${computerChoice}!`; //  computers random choice (tl) to html element
+console.log(`${user} chose ${fighter}`);// console displays user (tl) picked fighter (tl)
+    console.log(`The computer chose ${computerChoice}`); //computer choice display in console
+    let result = ""; // result variable initialized
+if (fighter === computerChoice) {
+      result = "You Tie!"; // strict equivalence of these two values means a tie
+    } else if (
+      (fighter === "bear" && computerChoice === "ninja") || 
+      (fighter === "ninja" && computerChoice === "hunter") ||
+      (fighter === "hunter" && computerChoice === "bear")
+    ) {
+      result = "You Win!"; // win condition based on if user chose specific fighter value and the computer chose specific fighter value for 3 win scenarios.
+    } else if (options.includes(fighter)) { // checks fighter choice against the options array
+      result = "You Lose!"; //outside of these specific tie and win options any other combination of choices will result in a loss
+    } else {
+      result = "Invalid Entry Please Press F5 to Play Again"; //if the tie, win conditions, and lose condition were not satisfied, then the fighter value was incorrect.
+    }
+    document.getElementById("result").innerHTML = result; //populates result of game to html element
+    console.log(result); // populates result of game to console
+     let answer = prompt(`${user}, would you like to play again? (Yes or No)`); //prompt for entering yes or no to question
+
+    if (!answer) {
+      playAgain = false; //if no answer, condition false
+    } else {
+      answer = answer.toLowerCase();// to lowercase is a good idea to normalize entries 
+      if (answer === "no") { //if no condition false
+        playAgain = false;
+      } else if (answer === "yes") {// if yes, condition true
+        playAgain = true;
+      } else {document.getElementById("falsereplayentry").innerHTML = ("Invalid Entry Please Press F5 to Play Again");
+        playAgain = false;} // incorrect entry displays in result
+      }
+    }
+  }
+
+</script>
+</body>
+
+</html>

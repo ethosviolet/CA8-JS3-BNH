@@ -11,7 +11,7 @@
 <p id="choice"></p> <!-- displays user name and fighter choice-->
 <p id="computer"></p> <!-- computers randomly selected choice-->
 <p id="result"></p> <!-- The reference for the getelementbyID.innerhtml (result) for the result of the game-->
-<p id="falsereplayentry"></p>
+<p id="falsereplayentry"></p> <!--This one is specifically for displaying error message with incorrect replay prompt entry after an initial round of the game has completed.-->
 <script>
   let user = prompt('Welcome to Bear Hunter Ninja! Please enter your name to get started:'); // user variable is entered with prompt message
   let greeting = `Hi ${user}`;// greeting is defined as the name you entered in a template literal
@@ -25,7 +25,7 @@
   const options = ["bear", "ninja", "hunter"]; // a constant array of the options for user or computer choice
   let playAgain = true; //play again variable assigned true by default
 
-  while (playAgain) { //start of play again loop
+  for (;;) {
   const randomIndex = Math.floor(Math.random() * options.length); // math.floor for integer value(Math.random(for random value) * options.length (0-2)
   const computerChoice = options[randomIndex]; // the computer choice is randomly assigned by taking the options array and selecting a random index value using the above formula.
   let fighter = prompt('Who are you: Bear, Ninja, or Hunter?'); // fighter variable is entered with prompt message
@@ -57,18 +57,18 @@ if (fighter === computerChoice) {
      let answer = prompt(`${user}, would you like to play again? (Yes or No)`); //prompt for entering yes or no to question
 
     if (!answer) {
-      playAgain = false; //if no answer, condition false
-    } else {
+      break; //if no answer, break loop
+    }
       answer = answer.toLowerCase();// to lowercase is a good idea to normalize entries 
-      if (answer === "no") { //if no condition false
-        playAgain = false;
-      } else if (answer === "yes") {// if yes, condition true
-        playAgain = true;
-      } else {document.getElementById("falsereplayentry").innerHTML = ("Invalid Entry Please Press F5 to Play Again");
-        playAgain = false;} // incorrect entry displays in result
+     if (answer === "no") { //if no, break loop
+        break;
+      }  else if (answer !== "yes") {// if answer is not a 'yes' or 'no' incorrect value, break loop and display error message
+         document.getElementById("falsereplayentry").innerHTML = ("Invalid Entry Please Press F5 to Play Again");
+         break;} 
+      
       }
     }
-  }
+  
 
 </script>
 </body>

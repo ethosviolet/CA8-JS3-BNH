@@ -23,8 +23,6 @@
   { document.getElementById("result").innerHTML = "Please Press F5 to Play Again"; // cancel displays this message
 }
   const options = ["bear", "ninja", "hunter"]; // a constant array of the options for user or computer choice
-  let playAgain = true; //play again variable assigned true by default
-
   for (;;) { //initlialize for loop
   const randomIndex = Math.floor(Math.random() * options.length); // math.floor for integer value(Math.random(for random value) * options.length (0-2)
   const computerChoice = options[randomIndex]; // the computer choice is randomly assigned by taking the options array and selecting a random index value using the above formula.
